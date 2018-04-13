@@ -1,0 +1,6 @@
+Default
+*.map
+obj
+*.exp
+*.pdb
+*.cache

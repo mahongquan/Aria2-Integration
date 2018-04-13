@@ -2,6 +2,7 @@
 #include<windows.h>
 #include <tlhelp32.h>
 
+
 int main (int argc, char **argv){
 	
 	// get parent pid
@@ -28,15 +29,15 @@ int main (int argc, char **argv){
 	STARTUPINFO si;
 	ZeroMemory(&si, sizeof(si));
 	ZeroMemory(&pi, sizeof(pi));
-	char cmd[65535] = {0};
-    sprintf(cmd, "%s\\..\\", argv[0]);
+	char cmd[535] = {0};
+    sprintf_s(cmd,535, "%s\\..\\", argv[0]);
 	chdir(cmd);
 	if (strcmp(argv[1], "aria2://stop-with-process/") == 0){
-		sprintf(cmd, "aria2c.exe -D --conf-path=aria2.conf --stop-with-process=%d", ppid);
+		sprintf_s(cmd,535, "aria2c.exe -D --conf-path=aria2.conf --stop-with-process=%d", ppid);
 		CreateProcess(NULL,cmd,NULL,NULL,0,CREATE_NO_WINDOW,NULL,NULL,&si,&pi);
 	}
  	else{
- 		sprintf(cmd, "aria2c.exe -D --conf-path=aria2.conf");
+ 		sprintf_s(cmd, 535,"aria2c.exe -D --conf-path=aria2.conf");
 		CreateProcess(NULL,cmd,NULL,NULL,0,CREATE_NO_WINDOW,NULL,NULL,&si,&pi);
 	}
 	return 0 ;
